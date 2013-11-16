@@ -1,19 +1,19 @@
-# Quick Guide for FXOS Development
+# Firefox OS快速开发指南
 
-This repository contains the English markdown sources for the book called "Quick Guide for Firefox OS Development" by Andre Alves Garzia.
+该项目为英文书籍"Quick Guide for Firefox OS Development"的中文Markdown翻译资源。
 
-## Live Book Page
+## 原稿页面
 
-The current live copy of the book is available from Leanpub at [the public book page](https://leanpub.com/quickguidefirefoxosdevelopment/)
+书籍英文原稿可以从Leanpub获取，这是其[发布页面](https://leanpub.com/quickguidefirefoxosdevelopment/)。
 
-## Contributing
+## 贡献
 
-To contribute to the English version of this book just use the issues and pull request features. To contribute to the other translations use their own repositories.
+请通过Issues和Pull request帮助改进该书的翻译问题。若需要翻译成其他语言，可以使用自己的项目进行翻译。这是[英文项目](https://github.com/soapdog/firefoxos-quick-guide)。
 
-## Other versions
+## 其他项目
 
-Portuguese version: [GitHub Repo](https://github.com/soapdog/guia-rapido-firefox-os/) and [Live book page](https://leanpub.com/guiarapidofirefoxos)
+葡萄牙语版: [GitHub项目](https://github.com/soapdog/guia-rapido-firefox-os/) 和 [原稿页面](https://leanpub.com/guiarapidofirefoxos)
 
-## License
+## 共享许可
 
-This book is distributed using Creative Commons license. More information inside the book.
+本书使用创作共用许可授权发布，书中将提到更多信息。

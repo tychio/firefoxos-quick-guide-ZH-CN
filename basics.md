@@ -1,107 +1,107 @@
-# Basic Concepts {#concepts}
+# 基础概念 {#concepts}
 
-Before we get our hands dirty and build our first app, lets learn some basic concepts about developing for Firefox OS. We learned in the [introduction](#introduction) that, just like web pages, apps in Firefox OS are based on HTML5. However, we haven't explained what makes Firefox OS apps different from regular web pages. 
+在我们开始折腾和构建我们第一个应用之前，让我们来学习一些关于开发Firefox OS基础概念。我们在[简介](#introduction)中学到了在Firefox OS中的应用如同网页一样基于HTML5。然而我们没解释为什么Firefox OS不同于常规的网页。
 
-If we use our collective knowledge about other mobile platforms we can see that native application generally will have:
+若将我们对于其他平台的知识集中起来，我们会看到原生应用通常会有：
 
-* A name and an icon that the user can press to launch the app.
-* Access to system services and hardware capabilities. 
+* 一个名称和图标可以被用户按下并启动应用。
+* 使用系统服务和硬件的权限。
 
-Looking at the big picture, a Firefox OS app is just a web page that has an icon, a name and is usually able to work offline (depending on how the app is implemented). All the data about an application such as name, icon and more is defined in a *application manifest file* that is the focus of our next section.
+总体上说，Firefox OS应用只是一个有图标和名字并且通常可以离线工作（取决于应用被如何实现）的网页。一个应用的所有数据，比如名称、图标或其他都是在一个 *应用清单（manifest）文件* 中被定义的，这将是我们下一部分的重点。
 
-## The Application Manifest
+## 应用清单
 
-The [manifest](https://developer.mozilla.org/docs/Apps/Manifest) is a [JSON](http://json.org) file that describes aspects of an hosted web app. Usually this file is called **manifest.webapp** and lives next to your main HTML file that is usually called **index.html**.
+应用清单[manifest](https://developer.mozilla.org/docs/Apps/Manifest)是一个[JSON](http://json.org)文件，用于描述web应用托管方面的部分。通常这个文件被命名为 **manifest.webapp** 并且和你的主HTML文件在一起，这个文件通常命名为 **index.html**。
 
-<<[Sample Manifest](code/sample_manifest.webapp)
+<<[Manifest示例](code/sample_manifest.webapp)
 
-Above we can see the manifest for an application called memos[^memos]. Among other things it describes who created the application, which icons are used, what is the name of the app, what file is used to launch the app (in this case it is *index.html*), what hardware access permissions your app requires, etc. This file is used by Firefox OS to add the application to the device's home screen and by the Firefox Marketplace to display the application on the catalog as we can see in the image below.
+在上面的示例中我们能看到这个manifest文件是为了一个叫做memos[^memos]的应用。除了其他方面，它还描述了应用的作者、应用的图标、应用的名称、应用的启动文件（该示例中为 *index.html*）、你的应用需要的硬件使用权限等。该文件被用于Firefox OS操作系统添加应用到设备的主屏幕还有下面我们看到的图片则用于在Firefox Marketplace应用市场的目录中显示。
 
-[^memos]: This is a sample app for Firefox OS as [seen on the Firefox Marketplace](https://marketplace.firefox.com/app/memos) for which the [source code is on GitHub](https://github.com/soapdog/memos-for-firefoxos).
+[^memos]：这是一个Firefox OS的简单应用，在[Firefox Marketplace应用市场能看到](https://marketplace.firefox.com/app/memos)其[源代码在GitHub上](https://github.com/soapdog/memos-for-firefoxos).
 
-![Memos app shown at the Firefox Marketplace](images/originals/memos-marketplace.png)
+![Memos应用显示在Firefox Marketplace应用市场中](images/originals/memos-marketplace.png)
 
-Note how the information from the manifest is used by the system to add the app to the homescreen, as we can see on the following screenshot.
+注意manifest中的信息是如何被系统用于添加应用到主屏幕的，我们可能从下面的截图看到。
 
-![Memos on the simulator](images/originals/memos-simulator.png)
+![Memos在模拟器上](images/originals/memos-simulator.png)
 
-By gathering your HTML, CSS, JavaScript, and a manifest file you already have an application ready to run on Firefox OS. Moving on our topic about basic concepts lets learn more about what application types there are.
+集合你的HTML、CSS、JavaScript和一个manifest文件你已经拥有一个能运行在Firefox OS上的应用了。接着我们关于基础概念的话题，让我们继续学习还有什么应用类型。
 
-## Types of Application
+## 应用类型
 
-Firefox OS currently has two types of applications: hosted apps and packaged apps - though more types may become available in the future (e.g., custom keyboards and the ability to create other system services).
+Firefox OS目前有两种应用类型：托管应用和打包应用 - 不过将来会有更多的类型被接受（如自定义键盘和创建其他系统服务的能力）。
 
-* **Hosted Apps:** Are hosted on a web server just like normal websites. This means that when the user launches a hosted app, its content is loaded from the remote server (or from the cache, if available).
-* **Packaged Apps:** Are distributed as a zip file and copied to the device when installed. When the user launches a packaged app, its contents are loaded from the zip file instead of a remote server. 
+* **托管应用：** 就像一般的网站一样被托管在一个web服务器上。这意味着当用户运行一个托管应用时，它的内容是从远程服务器上加载的（或者缓存，如果有的话）。
+* **打包应用：** 是以Zip文件被发布的，在安装被复制到设备上。当用户运行一个打包应用时，它的内容将从zip文件中加载，而不是远程服务器。
 
-There are pros and cons to both types. On the one hand, hosted apps are easier to maintain, as all you need to do maintain files on your web server. However, its harder to make them work offline because it requires the use of the much despised [**appcache**](https://developer.mozilla.org/pt-BR/docs/HTML/Using_the_application_cache). Hosted apps are also limited in which WebAPIs they can use, which means they can't do all the things a packaged app can do.   
+这两种类型各有优缺点。一方面，托管应用比较容易维护，因为所有你需要做维护的文件都在你的web服务器上。然而，使他们离线工作是比较难的，因为它需要使用万恶的[**appcache**](https://developer.mozilla.org/pt-BR/docs/HTML/Using_the_application_cache)。托管应用能使用的WebAPI也是受限的，这意味着它们不能做一个打包应用能做的所有事情。
 
-On the other hand, packaged apps have all their content stored on the device - which means they are always available when the user is offline (and so avoid needing appcache). They also have the ability to access security-sensitive WebAPIs that are not available to hosted apps. Updating them can be a bit painful, because you need to upload any new version to the Firefox Marketplace - which means going through the a review process, which can take some time.   
+另一方面，打包应用会把所有内容存储在设备中 - 这意味着当离线时它们总是可用的（所以也不需要appcache）。它们还能够使用那些没有提供给托管应用的安全敏感的WebAPI。更新它们可能有点痛苦，因为你需要把Firefox Marketplace应用市场上的版本更新到一个任意的新版本 - 这意味着需要通过一个审核过程，会花费一些时间。
 
-When trying to choose which type of application to build, consider: if you require advanced WebAPIs, then you should use a packaged app. However, if your application works fine without needing to access any advanced system services or device capabilities beyond those already available in a web browser, then always choose a hosted app. It is ok to use packaged apps if you don't have a place to host it.
+当尝试选择一个应用类型来构建时，考虑一下，如果你需要高级的WebAPI，那么你应该使用打包应用。然而，如果你的应用没有需要使用任何除了web浏览器中已有的服务的高级系统服务和硬件功能也能运转的很好，那么总应选择托管应用。如果你没有地方托管它也可以使用打包应用。
 
-Above I mentioned that appcache can be problematic (which is sometimes required for hosted apps). Don't worry too much as there are tools available to make appcache generation and deployment easier [^js-tools].
+以上我提到的appcache可能会有问题（有时候托管应用是需要的）。不用太担心，有一些有效的工具去生成appcache使之易于开发[^js-tools]。
 
-In this book we're going to build packaged apps, as it will allow us to explore what is possible with the WebAPIs. However, most of what we will learn about manifests applies to hosted apps. If you want to know more about distributing hosted apps, check [the hosted applications link at the developer hub](https://marketplace.firefox.com/developers/docs/hosted).
+在本书中我们将构建打包应用，因为它允许我们去探索可能的WebAPI。不过大部分我们会学习manifest应用于托管应用。如果你想更多的了解关于发布托管应用，浏览[开发者中心的托管应用链接](https://marketplace.firefox.com/developers/docs/hosted)。
 
-[^js-tools]: There are many useful tools out there, check out [Grunt](gruntjs.com), [Volo](http://volojs.org/), [Yeoman](http://yeoman.io/), [Bower](http://bower.io/). There is a lot of overlap among these tools, its a matter of preference which one you use. (I like Volo more than Grunt mostly because Volofiles are easier for me to read).
+[^js-tools]：这里有许多可用的工具，[Grunt](gruntjs.com)、 [Volo](http://volojs.org/)、 [Yeoman](http://yeoman.io/)、 [Bower](http://bower.io/)。 这些工具中有些是重复的，就看你喜欢使用哪个了（我通常喜欢Volo胜于Grunt，因为我读起Volofiles来更容易）。
 
-Now that we've covered the two types of applications that Firefox OS supports, let's look at the different levels of system access they can have.
+现在我们已经介绍了Firefox OS对于两种应用类型的支持情况，让我们来看看它们所能使用的系统级别上的区别。
 
-## Security Access Levels
+## 安全使用权限
 
-There are three security levels on Firefox OS - with each level having more access to APIs than the previous level.
+在Firefox OS上有三种安全等级 - 每个级别都比上一个级别有更多可使用的API。
 
-* **Plain (a.k.a. web):** This is the default level for all applications. This level applies to hosted apps and packaged apps that do not declare a `type` property in their manifest file. These apps have access to the common set of APIs found in browsers - but don't have access to any of Mozilla's WebAPIs.
-* **Privileged:** This type of app has access to all common APIs found in the Firefox browser, plus some additional ones, such as contacts, and system alarms. Only **packaged apps can be privileged apps** and the package must be digitally signed by the Firefox OS marketplace.
-* **Certified:** For security reasons, this level is only available to Mozilla and its partners (e.g., phone manufacturers, telecoms, etc.). Certified apps are able to access all the APIs, such as telephony and more. An example of certified app is the Firefox OS dialer application. 
+* **普通（又称为web）：** 这是所有应用的默认权限。该级别适用于托管应用和打包应用，在manifest文件中无需声明 `type` 属性。这些应用可使用通常在浏览器中能找到的API集 - 但不能使用任何Mozilla的WebAPI。
+* **特权：** 这类型的应用可使用所有的通常在Firefox浏览器中能找到的API，还有一些附加的，比如通讯录和系统闹钟。只有 **打包应用可以为特权应用**，而且这个包必须是被Firefox OS marketplace应用市场认证的。
+* **认证:** 因为安全原因，这个级别仅适用于Mozilla及其合作伙伴（比如手机厂商，电信等）。被认证的应用能使用所有API，比如通话之类的。一个被认证应用的例子就是Firefox OS的拨号器应用。
 
-During development, it is possible for us to access privileged APIs without needing any special permission from Mozilla. But when we want to distribute a privileged app, it first needs to go to the Firefox Marketplace. There, the code is checked as part of a rigorous approval process, and if it's found to be OK, it will be digitally signed - which tells users of Firefox OS that this application is allowed to access sensitive APIs.
+在开发中，我们可以使用所有特权API而不需要Mozilla任何的许可，这很重要。但是当我们想要发布一个特权应用时，首先它需要放到Firefox Marketplace应用市场上。在这，检查这些代码是一个严格审批过程的一部分，如果发现是好的，它将被认证 - 告诉Firefox OS的用户该应用被允许使用敏感的API。
 
-On [the page about the WebAPIs on the Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/WebAPI) we can see what APIs are implemented on what platforms and what access level is needed to use each API.
+在[Mozilla开发者网络上的WebAPI页面](https://developer.mozilla.org/en-US/docs/WebAPI)上我们能看到API的实践，使用每一个API需要什么平台和什么使用权限。
 
-![Access levels for the APIs](images/originals/webapi-access.png)
+![API的使用权限](images/originals/webapi-access.png)
 
-As we can see on the image above, any application can access the *IndexedDB API and FileHandle API* but only privileged apps can access the *Contacts API and Device Storage API*.
+比如我们能在上图中看到，任何应用都可以使用*IndexedDB接口和FileHandle接口*，但是只有特权应用能使用*Contacts接口和Device Storage接口*。
 
-## Mozilla's WebAPIs
+## Mozilla的WebAPI
 
-Firefox OS provides us with the APIs that enable us to build applications that are just as capable as native apps on other platforms. Access to hardware and services is done through the WebAPIs. To learn more about the list of available APIs for the current Firefox OS version check out [the WebAPI page on the Mozilla Wiki](https://wiki.mozilla.org/WebAPI).
+Firefox OS为我们提供API使我们能够构建一些就像在其他平台上的原生应用相同能力的应用，通过WebAPI使用硬件和服务。学习更多关于当前Firefox OS版本可用API列表，可访问[Mozilla维基上的WebAPI页面](https://wiki.mozilla.org/WebAPI)。
 
-Lets review some code examples to see how easy those APIs are to use. Don't take this example as a full documentation of the WebAPIs, they are just a small sample to make you understand how we can access device features using JavaScript.
+让我们查看一些示例代码，看看那些API是如何的易用。不要把这些例子作为WebAPI的全部文档，它们只是一个很小的样例，使你了解我们可以如何通过JavaScript使用设备特性。
 
-### Example #1: Making calls
+### 例 1：打电话
 
-Imagine that you have an application that needs to open the dialer with a phone number already filled in. You can just use the following code:
+想象你有一个应用需要打开一个存满电话号码的拨号器。你只能使用如下代码。
 
-<<[Sending a phone number to the dialer](code/webapi_samples/dial.js)
+<<[发送一个电话号码到拨号器](code/webapi_samples/dial.js)
 
-This code makes a request to the dialer app to call a particular number. Note that this doesn't actually place a call - the user will still need to tap the dial button to place the call. Requiring explicit user action before executing some other action is pretty common: it's a good security pattern because it requires user interaction through consent before allowing something to happen. Other APIs that can place calls without user interaction are available for more elevated access levels. Certified apps can place calls without interaction for example. The API used in the code above, called "Web Activities", is available to all apps though.
+这段代码会产生一个请求到拨号器应用并拨打指定的号码。注意，这不能真的进行一次呼叫 - 用户仍将需要按下拨出按钮来进行呼叫。在执行一些其他的操作前明确的询问用户行为是很常见的：这是非常安全的模式，因为需要用户在允许一些事发生前同意需要的交互。其他一些可以直接拨出电话而不用用户交互的API，则需要更高的使用权限。认证应用能直接拨出电话而无需例子中的交互。上面例子中使用的API叫做`Web Activities`，可用于所有应用。
 
-Check out the the Mozilla Blog for [more information about Web Activites](https://hacks.mozilla.org/2013/01/introducing-web-activities/). 
+在Mozilla的博客可以找到[更多关于Web Activites的信息](https://hacks.mozilla.org/2013/01/introducing-web-activities/)。
 
-### Example #2: Saving a contact
+### 例 2：保存联系方式
 
-Imagine that you have a company intranet and you want to provide a way to transfer a contact from the online intranet address book to the phone address book. You can do that with the Contacts API.
+想象你有一个公司内的局域网，并且你想提供一个从局域网地址簿传输联系方式到手机地址簿的方法。你可以使用Contacts API。
 
-<<[Saving a contact](code/webapi_samples/contact.js)
+<<[保存联系方式](code/webapi_samples/contact.js)
 
-This API creates an object with the contact data and saves it into the phone address book without requiring user interaction. Because access to contacts carries potential privacy implications, this API is only available for *privileged apps*. This pattern where you create an object with a success and an error callback is used in many of the WebAPIs.
+这个API创建了一个包含联系人数据的对象，并且不需要用户的交互就能将它保存到手机地址簿。因为访问联系人带有潜在的隐私问题，这个API只能适用于特权应用。你可以创建一个包含success和error的回调函数的对象，该模式在需要WebAPI中都有使用。
 
-To learn more about this API, read [the page about the *Contacts API* on the Mozilla Wiki](https://wiki.mozilla.org/WebAPI/ContactsAPI).
+关于该API的更多信息，可以阅读[Moziila维基上的*Contacts API*页面](https://wiki.mozilla.org/WebAPI/ContactsAPI)。
 
-### Example #3: Picking an image from the camera
+### 例 3：从相机选择一张照片。
 
-Imagine you are building an application that applies fancy filters to pictures. You want to place a button in your app that allows the user to pick a photo from a photo album or from the camera.
+想象你正构建一个可使用各种滤镜照片的应用。你想在你的应用中放置一个按钮用于让用户从相册或相机选择一张照片。
 
-<<[Picking an image](code/webapi_samples/pick.js)
+<<[选择一个图片](code/webapi_samples/pick.js)
 
-Here we see another example of a [WebActivity](https://hacks.mozilla.org/2013/01/introducing-web-activities/). These activities are available to all applications. In this specific sample we're using the *pick* activity and passing it the *MIME Types* of the files that we wish to retrieve. When this code is executed, the system shows a screen to the user asking where he or she wants to retrieve the image from (camera, gallery, wallpapers). If the user selects an image, the success callback is triggered. If the user cancels the operation, the error callback is executed. On the image below, we can see the dialog that lets the user pick a photo from the device:
+我们先看另一个[WebActivity](https://hacks.mozilla.org/2013/01/introducing-web-activities/)的例子。这些活动适用于所有应用。在这个特别的样例中我们使用*pick*活动并通过它获取我们希望取回的文件的*MIME Types*。当这段代码被执行，系统会显示一屏用于询问用户从哪获取一个图片（相机，照片流，壁纸）。如果用户选择一个图片，则回调函数success将被触发。如果用户取消操作，则回调函数error将被执行。在上图中，我们能看到对话框让用户从设备中选择一个照片。
 
-![Example of the *pick activity*](images/originals/pick_image.png)
+![*pick活动*的例子](images/originals/pick_image.png)
 
-## Summary
+## 总结
 
-In this chapter we saw that, unlike regular web pages, both Firefox OS's hosted apps and packaged apps rely on a manifest file. We also saw that, from a security perspective, packaged apps can be "privileged" or "certified". Only privileged and certified apps can access Mozilla's powerful set of WebAPIs. the WebAPIs are not available to hosted apps or to regular web pages. 
+在这一章中，我们说到了不同于常规网页，Firefox OS的托管应用和打包应用依赖于manifest文件。我们还说到了站在安全角度上看，打包应用可以是“特权”或“认证”的。只有特权和认证应用可以使用Mozilla强大的WebAPI集。这些WebAPI不适用于托管应用或常规网页。
 
-Now it's about time we get our hands dirty and create an app!
+现在是我们开始折腾然后创建一个应用的时候了。

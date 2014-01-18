@@ -1,64 +1,63 @@
-# Our First App {#firstapp}
+# 我们的第一个应用 {#firstapp}
 
-![Memos, a minimalist notepad app](images/originals/memos-app.png)
+![Memos，一个极简记事本应用](images/originals/memos-app.png)
 
-In this chapter we're going to build a simple **Memos** application, which is an application for taking notes. Before coding, lets review how this app works. 
+在这一章节，我们将建立一个简单的 **Memos** 应用，这是一个做笔记的应用。在编码前先让我们来看看这个应用的功能。
 
-The app has three screens. The first one is the main screen and has a list of your stored notes by title. When you click a note (or add a new one) you're moved to the detail screen that allows you to edit the content and title of the given note. This is shown in the figure below. 
+该应用有三个界面。第一个是主界面，有一个被存储的你的笔记的标题的列表。当你点击一个笔记（或添加一个新笔记）你将转到详情界面，可以让你编辑这个笔记的内容和标题。如下图所示。
 
-![Memos, editing screen](images/originals/memos-editing-screen.png)
+![Memos，编辑界面](images/originals/memos-editing-screen.png)
 
-On the screen shown above the user can choose to delete the selected note by clicking on the trash icon. This will cause a confirmation dialog to be shown.
+在上面显示的界面中，用户点击垃圾桶图标就可以选择是否删除被选中的笔记。这将引发一个确认对话框被显示出来。
 
-![Memos, note removal confirmation screen](images/originals/memos-delete-screen.png)
+![Memos，笔记删除确认界面](images/originals/memos-delete-screen.png)
 
-The source code for Memos is available at [the Memos Github Repo](https://github.com/soapdog/memos-for-firefoxos) (also available as a [.zip](https://github.com/soapdog/memos-for-firefoxos/archive/master.zip) file). I recommend you download the files, so it's easier to follow along. Another copy of the source code is available on the **code** folder inside the [github repository for this book](https://github.com/soapdog/firefoxos-quick-guide).
+可用的Memos源代码在[Memos的Github仓库](https://github.com/soapdog/memos-for-firefoxos)上（也可用[.zip](https://github.com/soapdog/memos-for-firefoxos/archive/master.zip)文件）。我建议你下载这个文件，这样更易于接下去的学习。可用源代码的另一份副本在[本书Github仓库](https://github.com/soapdog/firefoxos-quick-guide)里的 **code** 文件夹中。
 
-Memos uses [IndexedDB](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB) to store the notes and the [Gaia Building Blocks](http://buildingfirefoxos.com/building-blocks) to build the interface. In a future update to this book I will talk more about the Gaia Building Blocks, but in this first version I am just going to use them. You can check the link above to learn more about them and what user interface tools they provide.
+Memos使用[IndexedDB](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB)存储笔记并使用[盖亚构建模块](http://buildingfirefoxos.com/building-blocks)构建接口。以后更新本书时，我将谈到更多的盖亚构建模块，但在第一本中我只会使用它们。关于它们，你可以点开上面的链接学习更多的内容，以及它们提供的用户界面工具。
 
-The first step is to create a folder for the application, lets call this folder **memos**.
+第一步是创建应用程序的文件夹，我们来给这个文件夹命名为**memos**。
 
-## Creating the app manifest
+## 创建应用清单（Manifest）
 
-Memos manifest is pretty straight forward. Create a file named **manifest.webapp** on the **memos** folder. Manifests are [JSON](http://json.org) files that describes an application. In this file we place things such as the name of the app, who the developer is, what icons are used, what file is used to launch the app, what privileged APIs it would like to use, and more.
+Memos的清单是优雅而简介的。在**memos**文件夹中创建名为**manifest.webapp**的文件。清单是描述应用的[JSON](http://json.org)文件。在该文件中我们写一些东西，比如应用的名称、开发者是谁、使用的图标是什么、运行应用的文件是什么、想要使用什么特权API，还有其他的。
 
-Below we can see the contents of the Memos app manifest. Attention when copying this data because its very easy to place a comma on the wrong place and create an invalid JSON. There are many tools that you can use to validate JSON files but there is a special one that is built specifically for validating app manifests. You can check out this online tool at [http://appmanifest.org/](http://appmanifest.org/). To learn more about app manifests read [this page on MDN about them](https://developer.mozilla.org/docs/Apps/Manifest).
+在下面我们能看到Memos应用清单的内容。复制这些数据时要注意，因为非常容易在错误的地方写逗号导致JSON格式错误。这里有许多你能用来验证JSON文件的工具，不过这还有一个特别的可以构建特殊的应用清单。你可以从[http://appmanifest.org/](http://appmanifest.org/)找到这个在线工具。想学习更多关于应用清单的信息，阅读[MDN相关信息的页面](https://developer.mozilla.org/docs/Apps/Manifest)。
 
-<<[Memos manifest file (*manifest.webapp*)](code/memos/manifest.webapp)
+<<[Memos清单文件 (*manifest.webapp*)](code/memos/manifest.webapp)
 
-Lets review the fields from the manifest above.
+我们来从上面的清单中看看字段。
 
-|Field		|Description                                                                        |
+|字段		|描述                                                                        |
 |-----------|-----------------------------------------------------------------------------------|
-|name		|This is the name of the application.		                                                |
-|version	|This is the current version of the app. 										    |
-|launch_path|What file is used to launch your application.					                    |
-|permissions|What API permissions your app requests. More information about this below.				|
-|developer  |Who developed this application 													|
-|icons		|The icons used by the app in many different sizes.									|
+|name		|这是应用的名称。		                                                |
+|version	|这是应用的当前版本。				    |
+|launch_path|被用于启动你的应用的文件是什么。					                    |
+|permissions|你的应用请求什么API许可。更多相关信息在下面。				|
+|developer  |谁开发了这个应用。 													|
+|icons		|应用使用的许多不同尺寸的图标。									|
 
-The most interesting part of this manifest is the permissions field where we ask for the *storage* permission that allows us to use IndexedDB without size restrictions[^storage-permission] (thanks to that permission we can store as many notes as we want - though we sould be mindful not to use too much of the user's disk space!).
+该清单最有趣的部分是permissions字段，我们请求*storage*许可来允许我们无存储限制的使用IndexedDB[^storage-permission]（多亏那个许可，我们才能尽可能多的存储我们想要的笔记，尽管我们应该注意不要过多使用用户的磁盘空间！）。
 
-[^storage-permission]: To learn more about permissions read [the page on MDN about app permissions](https://developer.mozilla.org/en-US/docs/Web/Apps/App_permissions).
+[^storage-permission]: 学习更多关于permissions许可的信息，阅读[MDN关于许可的页面](https://developer.mozilla.org/en-US/docs/Web/Apps/App_permissions)。
 
-Now that the manifest is ready lets move on to the HTML.
+现在清单已经准备好了，我们该看看HTML了。
 
-## Building the HTML
+## 构建HTML
 
-Before we start working on the HTML, lets take a brief detour to talk quickly about the [Gaia Building Blocks](http://buildingfirefoxos.com/building-blocks), which are a collection of reusable CSS and JS with the *look and feel* of Firefox OS that we can use on our own apps.
+在我们在HTML上开始工作前，我们先来简短的谈谈[盖亚构建模块](http://buildingfirefoxos.com/building-blocks)，这是一个有着Firefox OS*感观*的可重用的CSS和JS集合，我们可以在我们自己的应用中使用。
 
-Just like on the Web, you're not required to use the *look and feel* of Firefox OS in your own app. Using or not using the Gaia Building Blocks is a personal decision - and a good applications should have it's own distinctive style and user experience. The important thing to understand is that your app will not suffer any type of prejudice or penalty on the Firefox Marketplace by not using the Gaia look and feel. I am using it here because I am not a good designer so ready made UI toolkits appeal to me (its either that or hiring a designer).
+正如网页中，你不需要在你自己的应用中使用Firefox OS的*感观*。使用或不使用盖亚构建模块是你个人的决定，而且一个良好的应用应该具有它自己的独特风格和用户体验。重要的是应该了解到，即使不使用盖亚感观你的应用也不会在Firefox Marketplace应用市场中遭受任何类型的偏见和处罚。我使用它，因为我不是个良好的设计师，所以现成的设计用户界面的工具很吸引我（要么雇佣一个设计师）。
 
-The HTML structure that we use in this application was built following the patterns adopted by the Gaia Building Blocks where each screen is a `<section>` and the elements follow a predefined format. If you haven't already, download the source code from the [memos repository]
-(https://github.com/soapdog/memos-for-firefoxos) so that you have the files (including the Building Blocks) to use. For those not confident with git and GitHub, the files are also available as a [.zip file](https://github.com/soapdog/memos-for-firefoxos/archive/master.zip). 
+我们在应用中使用的HTML的结构是被盖亚构建模块所采用的模式，每个界面是一个`<section>`，该元素使用某个预处理格式。如果你没有准备好，可以从[memos仓库](https://github.com/soapdog/memos-for-firefoxos)下载源代码，使用这些文件（包括构建模块）。对于那些不信任git和GitHub的，这个[.zip file](https://github.com/soapdog/memos-for-firefoxos/archive/master.zip)文件也是可用的。
 
-W> Warning: The version of the Gaia Building Blocks I used for this app is not the most up-to-date available from Mozilla. Trying to update to the current version will, unfortunately, break the Memos app. In your own projects, however, always use the latest version of the Gaia Building Blocks.
+W> 注意：我在这个应用中使用的盖亚构建模块的版本不是从Mozilla获取的最新的。不幸地是，若尝试更新到当前的版本将破坏该Memos应用。在你自己的项目中，无论如何一定要使用最新版本的盖亚构建模块。
 
-### Including the Building Blocks
+### 包含的构建模块
 
-Before doing anything else copy the **shared** and the **styles** folders that you obtained by downloading the Memos repository to the **memos** folder you created. This will allow use to use the Gaia Building Blocks in our app. 
+在做任何事之前，在你创建的**memos**文件夹中复制从Memos仓库下载获取到的**shared**和**styles**文件。这将允许在我们的应用中使用盖亚构建模块。
 
-Lets begin our **index.html** files by including the needed bits.
+让我们从我们的**index.html**文件开始，包括所需的一些东西。
 
 ~~~~~~~~
 <!DOCTYPE html>
@@ -77,11 +76,11 @@ Lets begin our **index.html** files by including the needed bits.
 </head>
 ~~~~~~~~
 
-On *line 01* we declare the DOCTYPE as HTML5. From *line 05 up to 15* we include the CSS from the various components that we're going to use in our app such as headers, lists, text entry fields and more.
+在*行01*中我们声明DOCTYPE为HTML5。从*行05*到*行15*，我们引入各种在我们的应用中使用的组件的CSS，比如头部、列表、文本输入字段和其他。
 
-### Building the main screen
+### 建立主界面
 
-Now we can start building the various screens. As mentioned earlier, each screen used by our app is a `<section>` inside the HTML `<body>`. The body tag must have an attribute *role* with its value equal to *application* because that is used by the CSS selectors to build the interface, so our body tag will be `<body role="application">`. Lets build the first screen and declare our body tag as well.
+现在我们可以开始建立各种界面。像之前提到的一样，每个界面在我们的应用中是一个在`<body>`中的`<section>`。body标签必须有一个*role*属性，它的值为*application*，因为那是被CSS选择器用于构建接口的，所以我们的body标签是`<body role="application">`。让我们建立第一个界面并声明我们的body标签。
 
 ~~~~~~~~
 <body role="application">
@@ -97,15 +96,15 @@ Now we can start building the various screens. As mentioned earlier, each screen
 </section>
 ~~~~~~~~
 
-Our screen has a `<header>` containing a button to add new notes and the application name. The screen also has an `<article>` which will be used to hold the list of stored notes. We're going to use the button and the article IDs to capture events when we reach the JavaScript implementation part.
+我们的界面中有一个`<header>`包括添加新笔记按钮和应用名称。界面中还有`<article>`用来放置被存储笔记的列表。当我们延伸到JavaScript实现部分时，我们将使用按钮和文章ID捕获事件。
 
-Be aware that each screen is a fairly straight forward HTML chunk. Building these same screens in many languages usually requires a lot more work. All we're doing is declaring our containers and giving them IDs when we need to reference them later.
+注意，每个界面就相当于是一个HTML块。构建使用不同语言的相同界面通常需要做许多其他工作。我们正在做的事就是声明我们的容器并在我们需要在之后引用它们时，获取它们的ID。
 
-Now that the main screen is done, lets build the editing screen.
+现在主界面做好了，我们来构建编辑界面。
 
-### Building the editing screen
+### 建立编辑界面
 
-The editing screen is a bit more complex because it also holds the dialog box used when the user tries to delete a note.
+编辑界面会更复杂一些，因为还放置了一个对话框，用于当用户尝试删除一个笔记的时候。
 
 ~~~~~~~~
 <section role="region" id="memo-detail" class="skin-dark hidden">
@@ -144,17 +143,17 @@ The editing screen is a bit more complex because it also holds the dialog box us
 </section>
 ~~~~~~~~
 
-At the top of the screen, represented by the `<header>` element, we have: 
+在界面的顶部，仍然出现了`<header>`元素，里面有：
 
- * a back button to return to the main screen, 
- * a text entry field that is used to hold the title of the given note, 
- * and a button that is used to share the note over email.
+ * 返回按钮，回到主界面。
+ * 文本字段用来放得到的笔记的标题，
+ * 并且按钮被用于通过电子邮件分享笔记。
 
-Below the top toolbar, we have a paragraph holding a `<textarea>` that holds the content of the note and then another toolbar with a trashcan button used to delete the current viewed note.
+在下面的顶部工具栏中，我们有一段放着一个 `<textarea>` ，那写着笔记的内容和另一个工具栏，包括用于删除当前浏览的笔记的垃圾箱按钮。
 
-These three elements and their child nodes are the editing screen. After them we have a `<form>` that is used as a dialog box containing the confirmation screen that is presented to the user when he or she tries to delete a note. This dialog box is pretty simple, it only contains the text of the confirmation prompt and two buttons; one for deleting the note and another for canceling the action.
+这三个元素和它们的子节点都是编辑界面。在它们后面我们有 `<form>` ，用来作为包含确认界面的对话框，当他或她试图删除一个笔记时就为用户呈现它。该对话框非常简单，它仅包含确认提示的文本和两个按钮；一个删除笔记而另一个取消这个动作。
 
-Now that we're closing this `<section>` we have all our screens implemented and the remaining HTML code is only there to include the JavaScript files and close the html file.
+现在我们闭合了这个 `<section>` 我们实现了所有的界面并且剩下的HTML代码只有引入JavaScript文件和闭合html文件了。
 
 ~~~~~~~~
 <script src="/js/model.js"></script>
@@ -163,22 +162,22 @@ Now that we're closing this `<section>` we have all our screens implemented and 
 </html>
 ~~~~~~~~
 
-## Crafting the JavaScript code
+## 加工JavaScript代码
 
-Now we're going to breathe life into our app by adding JavaScript. To better organize this code, I've divided the JavaScript code into two files:
+现在我们通过添加JavaScript为我们的应用注入活力。为了更好的组织代码，我将JavaScript代码划分到了两个文件里：
 
-* **model.js:** contains the routines to deal with storage and retrieval of notes but does not contain any app logic or anything related to the interface or data entry. In theory, we could reuse this same file in other apps that required text notes.
-* **app.js:** attaches the HTML elements with their event handlers and contains the app logic.
+* **model.js:** 包括常规的处理存储和笔记检索，但不包括任何应用程序逻辑或任何有关接口或数据字段的东西。理论上我们能在其他需要文本笔记的应用程序重用相同文件。
+* **app.js:** 为HTML元素绑定它们的事件处理器以及包括应用程序逻辑。
 
-Both files should be placed inside a **js** folder next to the **style** and **shared** folders.
+两个文件都应被放在一个**js**文件夹，之后还有**style** 和 **shared** 文件夹。
 
 ### model.js
 
-We're going to use [IndexedDB](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB) to store our notes. Since we asked the *storage* permission on the app manifest we can store as many notes as we want - however, we should not abuse this! Firefox OS devices generally have very limited storage space, so you always need to be mindful of what data you store (users will delete and down-rate your app if it uses too much storage space!). And storing excessive amounts of data will have a performance penalty, which will make your app feel sluggish. Please also note that when you submit an application to the FireFox OS marketplace, reviewers will ask you why you need unlimited storage space - if you can't justify why, your application will be rejected.  
+我们将使用[IndexedDB](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB)来存储我们的笔记。从我们在应用程序的清单中要求了*存储*许可，我们想存多少就存储多少。无论如何，我们不该滥用它！Firefox OS设备通常存储空间非常有限，所以你总需要考虑周全你要存储的数据是什么（如果你的应用使用太多的存储空间，用户会删除它并且它的下载率也将减少）。存储过多的数据有点性能损失，使你的应用感觉很慢。当你提交一个应用到Firefox OS marketplace应用市场时也请注意，审查员们会询问你为什么需要无限存储空间，如果你没有正当的原因，你的应用将被拒。
 
-The part of the code from *model.js* that is shown below is responsible for opening the connection and creating the storage.
+下面显示的*model.js*的这部分代码是可响应打开链接和创建存储的。
 
-A> Important: This code was written to be understood easily and does not represent the best practices for JS programming. Some global variables are used (I'm so going to hell for this) among other tidbits. The error handling code is basically non-existant. The main objective of this book is to teach the *workflow* of developing apps for Firefox OS and not teaching best JS patterns. That being said, depending on feedback, I will update the code in this book to better reflect best practices if enough people think it will not impact the beginners.
+A> 重要提示：该代码被写的浅显易懂并且不能表现最佳JS编程实践。使用了一些全局变量（我真该下地狱）等花絮。错误处理代码基本上是不存在的。本书的主要目的是教授为Firefox OS开发应用的*工作流*，而不是教最好的JS模式。话虽然这么说，根据反馈我会在本书中更新这部分代码，以更好的反映最佳实践，只要有够多的人认为这不会影响初学者。
 
 ~~~~~~~
 var dbName = "memos";
@@ -223,13 +222,14 @@ request.onupgradeneeded = function (event) {
 }
 ~~~~~~~
 
-A> Important: Forgive me again for the globals, this is an educational resource only. Another detail is that I removed the comments from the source code to save space in the book. If you pick the source from GitHub you will get all the comments.
+A> 重要提示：为了大局，再次原谅我，这仅是教学资源。另一个细节是我删除了本书中源代码的注释来节省空间。如果你从GitHub找出源代码你就会获得全部的注释。
 
-The code above creates a *db* object and a *request* object. The *db* object is used by other functions in the source to manipulate the notes storage.
+上面的代码创建了一个*db*对象和一个*request*对象。*db*对象在源代码中被其他函数用于笔记存储操作。
 
-On the implementation of the `request.onupgradeneeded` function we also create a welcome note. This function is executed when the application runs for the first time (or when the database version changes). This way once the application launches for the first time, the database is initialized with a single welcome note.
+在`request.onupgradeneeded`方法的实现中我们还创建了欢迎笔记。当应用程序第一次运行时该方法就会被执行（或当数据库版本改变时）。该方法就是一旦应用程序第一次启动，数据库就会被初始化并生成一个欢迎笔记。
 
-With our connection open and the storage initialized its time to implement the basic functions for note manipulation.
+
+与我们的连接打开以及初始化存储的同时来实现笔记操作的基础功能。
 
 ~~~~~~~~
 function Memo() {

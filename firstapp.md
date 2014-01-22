@@ -229,7 +229,7 @@ A> 重要提示：为了大局，再次原谅我，这仅是教学资源。另�
 在`request.onupgradeneeded`方法的实现中我们还创建了欢迎笔记。当应用程序第一次运行时该方法就会被执行（或当数据库版本改变时）。该方法就是一旦应用程序第一次启动，数据库就会被初始化并生成一个欢迎笔记。
 
 
-与我们的连接打开以及初始化存储的同时来实现笔记操作的基础功能。
+在我们打开链接以及初始化存储的同时来实现笔记操作的基础功能。
 
 ~~~~~~~~
 function Memo() {
@@ -292,7 +292,7 @@ function deleteMemo(inId, inCallback) {
 }
 ~~~~~~~~
 
-On the piece of code above we create a constructor function that creates new Memos with some fields already initialized. After that we implement functions for listing, saving and removing notes. Many of these functions receive a callback parameter called `inCallback` which is a function to be called after the function does its thing. This is needed due to the asynchronous nature of IndexedDB. All callbacks have the same signature which is `callback(error, value)` where one of the values is null depending on the outcome of the previous function.
+在上面的代码片段中，我们创建了构造函数来创建新的Memos和一些已经初始化的文件夹。然后我们实现笔记的列表、保存和删除功能。许多功能接受一个叫`inCallback`的回调参数，在那些函数做完它们的事之后会调用这个回调函数。由于IndexedDB的异步性质，这是必要的。所有回调都有相同的名字就是`callback(error, value)` ，value也有可能是null，这取决于上一函数的结果。
 
 A> Since this is a beginner book I've opted not to use [*Promises*](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise) since many beginners are not familiar with the concept. I recommend using such concepts to create easier to maintain code that is more pleasant to read.
 

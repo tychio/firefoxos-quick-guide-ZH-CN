@@ -1,10 +1,10 @@
 {backmatter}
 
-# Appendix 1: Useful links
+# 附录 1： 相关链接
 
 * [Mozilla](http://mozilla.org)
-* [Mozilla Brasil Community Page](http://mozillabrasi.org.br)
-* [Firefox OS Developer Hub](http://marketplace.firefox.com/developers)
-* [Mozilla Developers Network](http://developer.mozilla.org/): Best documentation ever!
-* [Firefox OS](http://www.mozilla.org/pt-BR/firefox/os/)
-* [WebAPI on Mozilla Wiki](http://wiki.mozilla.org/WebAPI) 
+* [Mozilla巴西社区页面](http://mozillabrasi.org.br)
+* [Firefox OS开发者中心](http://marketplace.firefox.com/developers)
+* [Mozilla开发者网络](http://developer.mozilla.org/): Best documentation ever!
+* [Firefox OS](http://www.mozilla.org/en-US/firefox/os/)
+* [WebAPI的Mozilla维基](http://wiki.mozilla.org/WebAPI) 

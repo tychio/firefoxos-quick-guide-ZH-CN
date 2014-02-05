@@ -294,13 +294,13 @@ function deleteMemo(inId, inCallback) {
 
 在上面的代码片段中，我们创建了构造函数来创建新的Memos和一些已经初始化的文件夹。然后我们实现笔记的列表、保存和删除功能。许多功能接受一个叫`inCallback`的回调参数，在那些函数做完它们的事之后会调用这个回调函数。由于IndexedDB的异步性质，这是必要的。所有回调都有相同的名字就是`callback(error, value)` ，value也有可能是null，这取决于上一函数的结果。
 
-A> Since this is a beginner book I've opted not to use [*Promises*](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise) since many beginners are not familiar with the concept. I recommend using such concepts to create easier to maintain code that is more pleasant to read.
+A> 从本书一开始，我就选择不去使用[*Promises*](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise)，因为许多初学者不太熟悉这个概念。我推荐使用这些概念来更简单的创建和维护代码，以至于更舒适的阅读。
 
-Now that our note storage and manipulation functions are ready, let's implement our app logic in a file called **app.js**.
+现在，我们的笔记存储和操作函数准备好了，让我们在**app.js**文件中实现应用逻辑。
 
 ### app.js
 
-This file will contain our app logic. Since the source code is too large for me to place it all at once on the book, I will break it in parts and explain each part piece by piece.
+该文件将包括我们的应用逻辑。由于源代码对于我来说放置在本书中太大了，我将拆成几部分并解释每部分。
 
 ~~~~~~~~
 var listView, detailView, currentMemo, deleteMemoDialog;
@@ -350,15 +350,15 @@ function newMemo() {
 }
 ~~~~~~~~
 
-At the beginning we declare some global variables (yuck!!!) to hold references to some DOM Elements that we want to use later inside some functions. The most interesting global is `currentMemo` which is an object that holds the current note that the user is reading.
+在开头我们声明了一些全局变量（可恶！！！）用来存放引用一些DOM元素，我们稍后想在一些函数中使用。最有趣的全局变量是`currentMemo`，它是用于存放当前用户阅读到的笔记内容的对象。
 
-The `showMemoDetail()` and `displayMemo()` functions work together. The first one loads the selected note into the `currentMemo` and manipulates the CSS of the elements so that the editing screen is shown. The second one picks the content from the `currentMemo` variable and places it on the screen. We could do both things on the same function but having them separate makes it easier to experiment with new implementations.
+`showMemoDetail()` 和 `displayMemo()` 函数在一起工作。前者载入被选择的笔记到 `currentMemo` 中并操作元素的CSS，以此来显示编辑界面。后者从 `currentMemo` 变量中挑出内容并在界面中放置它。我们可以在同一函数中做这两件事，但分开它们能更易于实验新的实现。
 
-The `shareMemo()` function uses a [WebActivity](https://hacks.mozilla.org/2013/01/introducing-web-activities/) to open the email application with a new message pre-filled with the selected notes content. 
+`shareMemo()` 函数使用[WebActivity](https://hacks.mozilla.org/2013/01/introducing-web-activities/)去打开邮件应用并新建一个预先写入被选择笔记内容的邮件。
 
-The `textChanged()` function picks the data from the entry fields and place them into the `currentMemo` object and then saves the note. This is done because the application is an `auto-save` app where your content is always saved. All alterations on the content or title of the note will trigger this function and the note will always be saved on the IndexedDB storage.
+`textChanged()` 函数挑出整个文件夹中的数据并填入 `currentMemo` 对象中，然后保存笔记。你的内容总会被保存，因为该应用程序是‘自动保存’应用。笔记所有的内容或标题的改变都将触发该函数并且笔记将总是被保存在IndexedDB存储中。
 
-The `newMemo()` function creates a new note and opens the editing screen with it.
+`newMemo()` 函数创建一个新笔记并打开编辑界面编辑它。
 
 ~~~~~~~~
 function requestDeleteConfirmation() {
@@ -387,11 +387,11 @@ function showMemoList() {
 }
 ~~~~~~~~
 
-The `requestDeleteConfirmation()` function is responsible for showing the note removal confirmation dialog.
+`requestDeleteConfirmation()` 函数是显示响应的，该笔记的可移动确认对话框。
 
-The `closeDeleteMemoDialog()` and `deleteCurrentMemo()` are triggered by the buttons on the removal confirmation dialog.
+`closeDeleteMemoDialog()` 和 `deleteCurrentMemo()` 函数是被可移动确认对话框上的按钮触发的。
 
-The `showMemoList()` function does some clean up before showing the list of stored notes. For example, it cleans the content of `currentMemo` since we're not reading any memo yet.
+`showMemoList()` 函数在显示被存储的笔记之前做一些清理工作的。比如它清除 `currentMemo` 的内容，因此我们还不能读到任何备忘录。
 
 ~~~~~~~~
 function refreshMemoList() {
@@ -437,9 +437,9 @@ function refreshMemoList() {
 }
 ~~~~~~~~
 
-The `refreshMemoList()` function modifies the DOM by building element by element the list of notes that is displayed on the screen. It would be a lot easier to use some templating aid such as [handlebars](http://handlebarsjs.com/) or [underscore](http://underscorejs.org/) but since this app is built using nothing but *vanilla javascript* we're doing everything by hand. This function is called by `showMemoList()` that was shown above.
+`refreshMemoList()` 函数通过构建显示在屏幕上的笔记列表元素来改变DOM。使用一些模版的帮助是非常简单的，比如[handlebars](http://handlebarsjs.com/) 或 [underscore](http://underscorejs.org/)，但由于该应用没有使用什么来构建，*vanilla javascript*，我们手写了一些东西。该函数被命名为 `showMemoList()` 如下所示。
 
-These are all the functions used by our app. The only part of the code that is missing is the initialization of the event handlers and the initial call of `refreshMemoList()`.
+这里是所有我们应用所使用的函数。只有一部分代码没有，就是事件绑定初始化和 `refreshMemoList()` 的初始调用。
 
 ~~~~~~~
 window.onload = function () {
@@ -464,35 +464,36 @@ window.onload = function () {
 };
 ~~~~~~~
 
-Now all files are ready and we can begin trying our application on the simulator.
+现在所有的文件准备好了，我们可以开始在模拟器上尝试我们的应用程序。
 
-## Testing the app on the simulator
+## 在模拟器上测试应用
 
-Before we try our application on the simulator we'd better check out if the files are in the correct place. Your memos folder should look like this one:
+我们在模拟器上尝试我们的应用程序之前，最好检查一下文件是否在正确的位置。你的memos文件夹应该看起来象这样：
 
-![List of files used by Memos](images/originals/memos-file-list.png)
+![Memos所使用的文件列表](images/originals/memos-file-list.png)
 
-If you have a hunch that you wrote something wrong, just compare your version with the one on [the memos github repository](https://github.com/soapdog/memos-for-firefoxos) (There is also a copy of the source code in a folder called **code** on the [book repository](https://github.com/soapdog/guia-rapido-firefox-os) ).
+如果你有一个直觉认为你写错了一些东西，只要比较你和[Memos GitHub库](https://github.com/soapdog/memos-for-firefoxos)的版本即可（这里还有一个副本，在[本书](https://github.com/soapdog/guia-rapido-firefox-os)的库中**code**文件夹中的源代码）。
 
-To open the *Simulator Dashboard* go to the menu for **Tools -> Web Developer -> Firefox OS Simulator**.
+打开*模拟器面板*选择菜单**Tools -> Web Developer -> Firefox OS Simulator**.
 
-![How to open simulator dashboard](images/originals/tools-web-developer-simulator.png)
+![如何打开模拟器面板](images/originals/tools-web-developer-simulator.png)
 
-With the dashboard open, click the **Add Directory** button and browse to where you placed the memos files and select the app manifest.
+当面板打开，点击**Add Directory添加目录**按钮并找到你放置的memos文件夹，选择该应用的清单（manifest）文件。
 
-![Adding a new app](images/originals/simulator-add-directory.png)
 
-If everything works as expected you will see the Memos app on the list of apps.
+![添加一个新应用](images/originals/simulator-add-directory.png)
 
-![Memos showing on the dashboard](images/originals/memos-on-dashboard-display.png)
+如果一切如期望般工作，你将在应用列表中看到Memos应用。
 
-When you add a new application, the simulator will launch with your new app running - allowing you to test it. Now you can test all the features for Memos. 
+![Memos显示在面板中](images/originals/memos-on-dashboard-display.png)
 
-Congratulations! you created and tested your first app. Its not a complex or revolutionary app - but I hope it helped you understand the development workflow of FireFox OS. As you can see, it's not very different from standard Web development.  
+当你添加一个新的应用程序，模拟器将执行你的新应用 － 允许你测试它。现在你能测试所有Memos的特性了。
 
-Remember that whenever you alter some of the source files you need to press the **Refresh** button to update the copy of the app that is stored on the simulator.
+恭喜！你创建和测试了你的第一个应用。它不是一个复杂或革命性的应用 － 但我希望它帮助你理解Firefox OS的开发工作流。如你所看到的，它和标准Web开发并不是完全不同的。
 
-## Summary
+记得无论何时，你改变你的源文件时，你需要按**Refresh**按钮更新应用的副本，它被存储在模拟器中。
 
-In this chapter we built our first application for Firefox OS and saw it running on the simulator. In the next chapter we're going to check out the developer tools that comes bundled with Firefox, they will make your life a lot easier when developing applications.
+## 总结
+
+这一章我们构建了我们的第一个Firefox OS应用，并看到了它运行在模拟器中。下一章中，我们将检查集成在Firefox中的开发工具，当开发应用程序时，它们将使你的生活更简单。
 

@@ -1,11 +1,12 @@
-# Developer Tools {#developertools}
+# 开发工具 {#developertools}
 
-Firefox has many tools to help web developers do their job. Many people are still using [FireBug](https://addons.mozilla.org/pt-BR/firefox/addon/firebug/) and haven't realize that Firefox now has its own built-in tools. In this chapter we're going to review the tools that are most useful for developing apps for Firefox OS.
+Firefox有许多工具能帮助网页开发者进行他们的工作。许多人仍然使用[FireBug](https://addons.mozilla.org/pt-BR/firefox/addon/firebug/)并不了解它本身的工具。在这一章，我们来看看这些对于开发Firefox OS应用最为实用的工具。
 
-If you're interested in learning more about these tools, and what other dev tools goodness is about to land in Firefox, check out the [developer tools](https://developer.mozilla.org/en-US/docs/Tools) page on Mozilla's Developer Network (really, go check that link! I will wait).
+如果你有兴趣学习更多的工具可以在Mozilla的开发者网络中检出[developer tools开发者工具](https://developer.mozilla.org/en-US/docs/Tools)（千真万确，去点开链接，我等着），还有其他优良的开发工具在Firefox平台上。
  
-## Introducing the Responsive Design View
+## 介绍响应式设计视图
 
+Web开发的普通工作流是改变HTML文件，然后重载浏览器页面去查看改变了什么。除非你使用像Grunt或者Volo之类的东西，
 A common workflow in Web development is changing a HTML file and then reloading the page in the browser to see what's changed. Unless you are using something like Grunt or Volo, generally there won't be the need for a compilation step or similar. Even though the Firefox OS Simulator permits you to use that same workflow, the emulator is currently restricted to one resolution (480x320). This is less than ideal if you are also designing your application to work on tablets, phablets, giant TVs, or anything in between.  
 
 To check how your app will look on any screen resolution, you can use Firefox's **Responsive Design View** tool to change the screen (and viewport). It can be enabled by going to the **Tools menu -> Web Developer -> Responsive Design View** as shown in the image below. When you activate this tool, the window will change so that you can alter the viewport size using the drag corners or the selection box.

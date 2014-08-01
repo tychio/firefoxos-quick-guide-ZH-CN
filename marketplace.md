@@ -33,15 +33,15 @@
 
 现在你的应用准备就绪，并且熟练掌握了符合审查标准的知识，是时候让我们把它发给marketplace应用市场了。使用应用市场页面顶部的齿轮按钮浏览**My Submissions**。
 
-![My Submissions](images/originals/marketplace-my-submissions.png)
+![我的提交](images/originals/marketplace-my-submissions.png)
 
 在应用管理页面中，你需要点击顶部菜单的**Submit An App**。
 
-![Submit An App](images/originals/marketplace-new-app.png)
+![提交应用](images/originals/marketplace-new-app.png)
 
 该链接将带你到提交新应用的表单，就像下面的截图一样。
 
-![Submit New App](images/originals/marketplace-step-1.png)
+![提交新应用](images/originals/marketplace-step-1.png)
 
 在这个页面上你可以选择如下选项：
 
@@ -50,33 +50,31 @@
 * 适用于什么设备类型（Firefox OS，Firefox 桌面，手机上的移动版Firefox浏览器，平板电脑上的移动版Firefox浏览器）。
 
 在做出选择后你会被带到第二屏。在本书中我们关注打包应用，但是托管应用更简单。
-After making these choices you're driven to the second screen. On this book we're focusing on packaged apps but hosted apps are similar. 
 
-In the remaining text of this chapter we're assuming that we're shipping a free Firefox OS packaged app. In this case we need to upload the zip file we prepared on the previous section.
+在本章剩余的内容中，我们假设我们免费提交Firefox OS的打包应用。这种情况下，我们需要上传前面准备的zip文件。
 
-After uploading the file, it undergoes an automated process and a report is shown with many options.
+上传文件后，它经过自动处理并出现报告，显示了许多选项。
 
-![After the zip upload](images/originals/marketplace-step-1_5.png)
+![上传zip之后](images/originals/marketplace-step-1_5.png)
 
-From the screen shot above we can see that the app I sent to the marketplace has no errors but contains six warnings. Ignoring the warnings for the sake of this text, lets check what the **minimum requirements** for this app are. In this case, the last option *Smartphone-Sized Displays (qHD)* should be unchecked because our application adapts to any screen size.
+在截屏上我们可以看到我发到应用市场的应用，没有错误，但包含了六个警告。忽略文本理由的警告，让检查该应用 **最低需求** 是什么。在这种情况下，最后的选项 *智能手机显示尺寸（qHD）*应该不会被检查，因为我们的应用程序适配于任何屏幕尺寸。
 
-The next step is called **Step #3: Details** and it is where you fill the information about your application such as category, description, screen captures, etc.
+下一步就是**步骤 #3：详情**，在这填上关于你的应用程序的信息，比如分类、描述、屏幕捕获等。
 
-![Filling details](images/originals/marketplace-step-3.png)
+![填写详情](images/originals/marketplace-step-3.png)
 
-After filling-in the details, the submission process is done. Now you just wait for the approval from the marketplace reviewers. Congratulations you shipped a Firefox OS application!!!
+填入之后，提交过程就完了。现在你只需要等待应用市场的检查者的批准。恭喜你发布了Firefox OS应用程序！！！
 
-On the [Application Management page](https://marketplace.firefox.com/developers/submissions) you can check the status of your submissions and alter details if needed.
+在[应用程序管理页面](https://marketplace.firefox.com/developers/submissions)你可以检查你的提交状态，如果需要的话还可以修改详情。
 
-To learn more about submitting applications to the Firefox Marketplace read [this article on the Firefox OS developer hub](https://marketplace.firefox.com/developers/docs/submission).
+要学习更多向Firefox应用市场提交应用程序，可以读[Firefox OS开发者文集](https://marketplace.firefox.com/developers/docs/submission)。
 
-## Summary
+## 总结
 
-Congratulations!!! You have a new application on the Firefox Marketplace, you're exploring a brand new market!
+恭喜！！！你在Firefox应用市场有了新的应用程序，你正探索一个全新的市场。
 
-I hope you enjoyed this quick guide. I plan to update and expand this guide often - so keep your eyes open and register for the updates. If you downloaded this book from Leanpub then its all good because you will receive emails about any updates. If you downloaded it from somewhere else then please consider fetching it from [the official page at Leanpub](http://leanpub.com/quickguidefirefoxosdevelopment) and registering your email. It's free and, no, you won't get any spam. Promise. 
+我希望你喜欢本快速指导。我计划经常更新并扩展该指导，所以持续注视并记录更新。如果你从Leanpub下载了它，那都是可以的，因为你将收到所有更新的邮件。如果你从其他哪里下载了它，那请考虑从[Leanpub上的官方页面](http://leanpub.com/quickguidefirefoxosdevelopment)获取，并注册你的电子邮件地址。这是免费的，并且没有任何广告，我发誓。
 
-Please send me feedback. This book was written by pulling all-nights before a tech conference so you can infer how much I enjoy this project and want to see it succeed. I can be reached for feedback on my Twitter account at [@soapdog](http://twitter.com/soapdog) and over email at [fxosquickguide@andregarzia.com](mailto:fxosquickguide@andregarzia.com). My home page is at [http://andregarzia.com](http://andregarzia.com).
+请给我反馈。本书是在一个技术会议的整个晚上写出的，所以你会推断出我有多爱这个项目，有多想看它完成。我可以在我的Twitter账户[@soapdog](http://twitter.com/soapdog)上收集反馈，还有电子邮箱[fxosquickguide@andregarzia.com](mailto:fxosquickguide@andregarzia.com)。我的主页是[http://andregarzia.com](http://andregarzia.com)。
 
-Now that you're a part of the group of Firefox OS app creators, come be a part of the greater Mozilla community: Help keep the web free and open made by users for users. Join us at [http://www.mozilla.org/contribute/](http://www.mozilla.org/en-US/contribute/) and help Firefox OS grow!
-
+现在你是Firefox OS应用创造者的一员啦，来成为更大的Mozilla社区的一员吧：帮助用户保持网络开发与免费。在[http://www.mozilla.org/contribute/](http://www.mozilla.org/en-US/contribute/)加入我们，帮助Firefox OS成长。
